@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>The MarketPlace Netrues</title>
+<meta name="description" content="The MarketPlace Netrues — trusted hub for trading, gaming services, and verified middleman protection." />
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#050507;
+    --card: rgba(255,255,255,0.04);
+    --muted:#9aa4b2;
+    --accent:#4DB8FF;
+    --accent-2:#A050FF;
+    --glass: rgba(255,255,255,0.03);
+    --glass-strong: rgba(255,255,255,0.06);
+    --text:#eaf6ff;
+    --radius:14px;
+    --max-w:1150px;
+    --shadow: 0 8px 30px rgba(2,6,12,0.6);
+    --transition: 220ms cubic-bezier(.2,.9,.3,1);
+  }
+  body.light { --bg: #f6fbff; --card: rgba(6,10,18,0.02); --muted: #525b6a; --text: #071425; --glass: rgba(2,6,12,0.03); }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Poppins,Inter,system-ui,Arial;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max-w);margin:0 auto;padding:22px}
+
+  /* header/logo */
+  header{position:sticky;top:10px;z-index:60;padding:10px 22px;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.12));display:flex;align-items:center;gap:12px;backdrop-filter: blur(6px)}
+  .logo { display:flex;align-items:center;gap:12px; }
+  .logo .svg { width:52px;height:52px;border-radius:12px;padding:8px;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 6px 20px rgba(75,160,255,0.12);display:grid;place-items:center;font-weight:800;color:#041428; }
+  .logo h1{margin:0;font-size:18px;line-height:1}
+  .logo p{margin:0;font-size:12px;color:var(--muted)}
+
+  .top-controls{margin-left:auto;display:flex;gap:10px;align-items:center}
+  .btn {background:var(--glass);border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:999px;color:var(--text);cursor:pointer;font-weight:700;transition:all var(--transition)}
+  .btn:active{transform:translateY(1px)}
+  .btn.primary {background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#051422;box-shadow:0 12px 30px rgba(77,184,255,0.12)}
+  .btn-anim{position:relative;overflow:hidden}
+  .btn-anim::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));opacity:0;transform:translateX(-10%);transition:all 420ms}
+  .btn-anim:hover::after{opacity:1;transform:translateX(0)}
+  .icon-btn{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:var(--glass);border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+
+  /* hero */
+  .hero{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:center;margin-top:22px}
+  .hero-card{padding:28px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.03);box-shadow:var(--shadow)}
+  .hero h2{font-size:30px;margin:0 0 8px;text-shadow:0 4px 18px rgba(77,184,255,0.06)}
+  .hero p{color:var(--muted);margin:0 0 18px}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .small-stats{display:flex;gap:10px;margin-top:12px}
+  .stat{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px;border-radius:12px;min-width:110px;text-align:center;border:1px solid rgba(255,255,255,0.02)}
+  .stat strong{display:block;font-size:18px}
+
+  /* marketplace grid */
+  .section{margin-top:30px}
+  .grid{display:grid;gap:14px}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+  .card{background:var(--card);border-radius:12px;padding:16px;border:1px solid var(--glass);backdrop-filter: blur(8px)}
+  .cat-icon{width:56px;height:56px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#041426;font-weight:800;box-shadow:0 8px 30px rgba(77,184,255,0.08)}
+
+  /* sellers */
+  .sellers{display:flex;gap:12px;flex-wrap:wrap}
+  .seller{min-width:200px;flex:1 1 220px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03)}
+  .seller .avatar{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;font-weight:700;color:#021421}
+  .seller h4{margin:8px 0 4px;font-size:16px}
+  .tag{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:700;background:rgba(255,255,255,0.02);font-size:12px}
+
+  /* floating discord button */
+  .float-discord{position:fixed;right:18px;bottom:18px;z-index:70;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+  .bubble{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#041425;font-weight:800;box-shadow:0 12px 40px rgba(77,184,255,0.15);cursor:pointer}
+  .bubble.small{width:56px;height:56px;border-radius:12px;padding:0;display:grid;place-items:center}
+
+  /* loading overlay */
+  #loadingOverlay{position:fixed;inset:0;z-index:999;background:linear-gradient(180deg,#02040a,#071022);display:grid;place-items:center;color:var(--text);transition:opacity 400ms;pointer-events:auto}
+  .lds{display:flex;gap:8px;align-items:center}
+  .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);opacity:0;animation:dot 1.2s linear infinite}
+  .dot:nth-child(2){animation-delay:.12s}
+  .dot:nth-child(3){animation-delay:.24s}
+  @keyframes dot{0%{transform:translateY(0);opacity:0.1}50%{transform:translateY(-10px);opacity:1}100%{transform:translateY(0);opacity:0.1}}
+
+  /* responsive */
+  @media (max-width:980px){.hero{grid-template-columns:1fr;gap:16px}.grid.cols-3{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){header{padding:12px}.wrap{padding:12px}.grid.cols-3{grid-template-columns:1fr}.seller{flex:1 1 100%}.top-controls{display:none}}
+</style>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+
+<div id="loadingOverlay" aria-hidden="false">
+  <div class="center">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+      <div style="width:64px;height:64px;border-radius:12px;padding:8px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-weight:800;color:#041428">MN</div>
+      <div style="text-align:left">
+        <div style="font-size:20px;font-weight:800">The MarketPlace Netrues</div>
+        <div style="font-size:12px;color:var(--muted)">Trusted trades • Verified middlemen</div>
+      </div>
+    </div>
+    <div class="lds" aria-hidden="true"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    <div style="margin-top:10px;color:var(--muted);font-size:13px">Loading — bringing the neon market to life...</div>
+  </div>
+</div>
+
+<div class="wrap" role="main">
+<header>
+  <div class="logo">
+    <div class="svg">MN</div>
+    <div><h1>The MarketPlace Netrues</h1><p class="muted">Trusted hub for safe trades & gaming</p></div>
+  </div>
+  <div class="top-controls">
+    <div class="toggle" id="themeToggle" title="Toggle dark / light">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.9"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="white" stroke-opacity="0.9" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <span style="font-weight:700;font-size:13px">Theme</span>
+    </div>
+    <button class="btn btn-anim" id="copyInvite">Copy Invite</button>
+    <button class="btn primary btn-anim" id="joinTop">Join Discord</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <div class="hero-card">
+    <h2>Trade. Play. Trust.</h2>
+    <p class="muted">Verified marketplace for gaming accounts, services, and secure trades backed by trusted middlemen. Join events, find deals, and trade safely.</p>
+    <div class="cta">
+      <button class="btn primary btn-anim" id="ctaJoin">Join Discord</button>
+      <button class="btn btn-anim" id="viewMM">View Middleman</button>
+      <button class="btn btn-anim" id="openMarket">Explore Market</button>
+    </div>
+    <div class="small-stats" style="margin-top:16px">
+      <div class="stat"><strong id="cTrades">0</strong><div class="muted">Successful Trades</div></div>
+      <div class="stat"><strong id="cSellers">0</strong><div class="muted">Verified Sellers</div></div>
+      <div class="stat"><strong id="cMembers">0</strong><div class="muted">Active Members</div></div>
+    </div>
+  </div>
+</div>
+
+<footer class="center muted" style="margin-top:30px;padding-bottom:40px">© 2025 The MarketPlace Netrues — built with ♡</footer>
+</div>
+
+<!-- floating discord -->
+<div class="float-discord">
+  <button class="bubble small" id="bubbleSmall" title="Join Discord" aria-label="Join Discord">💬</button>
+  <button class="bubble" id="bubbleBig" title="Join The MarketPlace Netrues" aria-label="Join The MarketPlace Netrues">Join Discord</button>
+</div>
+
+<script>
+const DISCORD_INVITE = 'https://discord.gg/QV4CrZ7puw';
+
+/* loading overlay */
+const loading = document.getElementById('loadingOverlay');
+window.addEventListener('load', ()=>{ setTimeout(()=>{ loading.style.opacity='0'; loading.style.pointerEvents='none'; setTimeout(()=>loading.remove(),600); },700); });
+
+/* counters */
+const counts={trades:1420,sellers:86,members:2320};
+function animateCount(id,to){const el=document.getElementById(id);if(!el) return;let s=0;const step=Math.max(1,Math.floor(to/40));const iv=setInterval(()=>{s+=step;if(s>=to){el.textContent=to;clearInterval(iv);}else el.textContent=s},20);}
+animateCount('cTrades',counts.trades);animateCount('cSellers',counts.sellers);animateCount('cMembers',counts.members);
+
+/* theme toggle */
+const body=document.body;
+const themeToggle=document.getElementById('themeToggle');
+function setTheme(mode){if(mode==='light')body.classList.add('light');else body.classList.remove('light');localStorage.setItem('mn_theme',mode);}
+const saved=localStorage.getItem('mn_theme')||'dark';
+setTheme(saved);
+themeToggle.addEventListener('click',()=>{const now=body.classList.contains('light')?'dark':'light';setTheme(now);});
+
+/* copy invite + open invite */
+document.getElementById('copyInvite').addEventListener('click',async ()=>{try{await navigator.clipboard.writeText(DISCORD_INVITE);alert('Discord invite copied!');}catch(e){prompt('Copy this invite',DISCORD_INVITE);}});
+['joinTop','openTicket','ctaJoin','bubbleSmall','bubbleBig'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('click',()=>window.open(DISCORD_INVITE,'_blank'));});
+
+/* simple nav helpers */
+document.getElementById('viewMM')?.addEventListener('click',()=>alert('Scroll to middleman section (placeholder)'));
+document.getElementById('openMarket')?.addEventListener('click',()=>alert('Scroll to marketplace (placeholder)'));
+document.getElementById('reqMM')?.addEventListener('click',()=>{const name=prompt('Enter your Discord tag');if(name)alert('MM request sent. Check Discord.');});
+</script>
+</body>
+</html>
